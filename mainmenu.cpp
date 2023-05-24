@@ -11,13 +11,28 @@ MainMenu::MainMenu(QWidget *parent)
       vbox->setSpacing(5);
 
       QLabel *label = new QLabel("Please choose the operation", this);
-      QPushButton *quitBtn = new QPushButton("Add", this);
-//      QPushButton *multiply = new QPushButton("Multiply", this);
+      mAdd = new QPushButton("Add", this);
       mMultiply = new QPushButton("Multiply", this);
+      mHistory = new QPushButton("History", this);
 
       vbox->addWidget(label, 0);
-      vbox->addWidget(quitBtn, 1);
+      vbox->addWidget(mAdd, 1);
       vbox->addWidget(mMultiply, 2);
+      vbox->addWidget(mHistory, 3);
 
-      connect(quitBtn, &QPushButton::clicked, qApp, &QApplication::quit);
+}
+
+QPushButton *MainMenu::getAddBttn()
+{
+      return mAdd;
+}
+
+QPushButton *MainMenu::getMltplyBttn()
+{
+      return mMultiply;
+}
+
+QPushButton *MainMenu::getHistoryBttn()
+{
+      return mHistory;
 }

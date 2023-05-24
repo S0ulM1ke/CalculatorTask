@@ -5,22 +5,63 @@
 #include <QVBoxLayout>
 #include <QApplication>
 
-MainWidget::MainWidget(QWidget *parent)
+void MainWidget::setMode(int mode)
+{
+    if (currWidgetPtr != nullptr){
+        currWidgetPtr->hide();
+        //currWidgetPtr = nullptr;
+    }
+
+    switch (mode) {
+    case 0:
+        currWidgetPtr = menu;
+        goBack->hide();
+        menu->show();
+        break;
+    case 1:
+        goBack->show();
+        break;
+    case 2:
+        goBack->show();
+        break;
+
+    case 3:
+        goBack->show();
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWidget::drawWidgets()
+{
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QVBoxLayout *backButtonLayout = new QVBoxLayout;
+    QVBoxLayout *menuLayout = new QVBoxLayout;
+
+
+    mainLayout->addLayout(backButtonLayout);
+    mainLayout->addLayout(menuLayout);
+
+    menu = new MainMenu(this);
+    goBack = new QPushButton("< Return to main menu", this);
+
+    backButtonLayout->addWidget(goBack, 0, Qt::AlignBottom | Qt::AlignLeft);
+    menuLayout->addWidget(menu, 0, Qt::AlignCenter);
+}
+
+MainWidget::MainWidget(QWidget *parent, int mode)
     : QWidget(parent)
 {
-    QVBoxLayout *vbox = new QVBoxLayout(this);
-    MainMenu *menu = new MainMenu(this);
-    menu->show();
-    vbox->addWidget(menu, 0, Qt::AlignCenter); //Реализовать connect
+     //Реализовать connect
 
+    drawWidgets();
+    setMode(mode);
 
-//    QVBoxLayout *vbox = new QVBoxLayout(this);
-//      vbox->setSpacing(5);
-
-//      QPushButton *quitBtn = new QPushButton("Quit", this);
-//      vbox->addWidget(quitBtn, 0, Qt::AlignCenter);
-
-//      connect(quitBtn, &QPushButton::clicked, qApp, &QApplication::quit);
+    connect(goBack, &QPushButton::clicked, this, [this]{setMode(0);});
+    connect(menu->getAddBttn(), &QPushButton::clicked, this, [this]{setMode(1);});
+    connect(menu->getMltplyBttn(), &QPushButton::clicked, this, [this]{setMode(2);});
+    connect(menu->getHistoryBttn(), &QPushButton::clicked, this, [this]{setMode(3);});
 }
 
 MainWidget::~MainWidget()
