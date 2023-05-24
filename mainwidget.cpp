@@ -9,7 +9,6 @@ void MainWidget::setMode(int mode)
 {
     if (currWidgetPtr != nullptr){
         currWidgetPtr->hide();
-        //currWidgetPtr = nullptr;
     }
 
     switch (mode) {
