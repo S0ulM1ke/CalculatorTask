@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
         mainwidget.h
         mainmenu.h
         mainmenu.cpp
+        calculator.h
+        calculator.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

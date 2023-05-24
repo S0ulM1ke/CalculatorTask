@@ -2,7 +2,9 @@
 #define MAINWIDGET_H
 
 #include "mainmenu.h"
+#include "calculator.h"
 #include <QWidget>
+#include <QStackedWidget>
 
 class MainWidget : public QWidget
 {
@@ -11,8 +13,15 @@ private:
     void setMode(int mode);
     void drawWidgets();
 
+    enum operationType {
+        ADD = 0,
+        MULTIPLY = 1
+    };
+
     QWidget* currWidgetPtr = nullptr;
     MainMenu* menu;
+    QStackedWidget* stackedWidget;
+    Calculator* addOper;
     QPushButton* goBack;
 
 public:

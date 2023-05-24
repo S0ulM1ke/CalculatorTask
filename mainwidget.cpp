@@ -1,5 +1,4 @@
 #include "mainwidget.h"
-#include "mainmenu.h"
 
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -15,10 +14,12 @@ void MainWidget::setMode(int mode)
     case 0:
         currWidgetPtr = menu;
         goBack->hide();
+        stackedWidget->setCurrentIndex(mode);
         menu->show();
         break;
     case 1:
         goBack->show();
+        stackedWidget->setCurrentIndex(mode);
         break;
     case 2:
         goBack->show();
@@ -35,18 +36,17 @@ void MainWidget::setMode(int mode)
 void MainWidget::drawWidgets()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    QVBoxLayout *backButtonLayout = new QVBoxLayout;
-    QVBoxLayout *menuLayout = new QVBoxLayout;
 
-
-    mainLayout->addLayout(backButtonLayout);
-    mainLayout->addLayout(menuLayout);
-
-    menu = new MainMenu(this);
+    stackedWidget = new QStackedWidget(this);
     goBack = new QPushButton("< Return to main menu", this);
+    menu = new MainMenu;
+    addOper = new Calculator(nullptr, ADD);
 
-    backButtonLayout->addWidget(goBack, 0, Qt::AlignBottom | Qt::AlignLeft);
-    menuLayout->addWidget(menu, 0, Qt::AlignCenter);
+    stackedWidget->addWidget(menu);
+    stackedWidget->addWidget(addOper);
+
+    mainLayout->addWidget(stackedWidget, 0 , Qt::AlignCenter);
+    mainLayout->addWidget(goBack, 0, Qt::AlignBottom | Qt::AlignLeft);
 }
 
 MainWidget::MainWidget(QWidget *parent, int mode)
