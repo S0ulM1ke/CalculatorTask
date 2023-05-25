@@ -22,6 +22,10 @@ set(PROJECT_SOURCES
         mainmenu.cpp
         calculator.h
         calculator.cpp
+        history.h
+        history.cpp
+        filedirector.h
+        filedirector.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

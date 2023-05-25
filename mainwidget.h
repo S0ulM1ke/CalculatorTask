@@ -18,10 +18,10 @@ private:
         MULTIPLY = 1
     };
 
-    QWidget* currWidgetPtr = nullptr;
     MainMenu* menu;
     QStackedWidget* stackedWidget;
     Calculator* addOper;
+    Calculator* multiplyOper;
     QPushButton* goBack;
 
 public:

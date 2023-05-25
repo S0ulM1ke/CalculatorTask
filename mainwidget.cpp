@@ -6,16 +6,10 @@
 
 void MainWidget::setMode(int mode)
 {
-    if (currWidgetPtr != nullptr){
-        currWidgetPtr->hide();
-    }
-
     switch (mode) {
     case 0:
-        currWidgetPtr = menu;
         goBack->hide();
         stackedWidget->setCurrentIndex(mode);
-        menu->show();
         break;
     case 1:
         goBack->show();
@@ -23,6 +17,7 @@ void MainWidget::setMode(int mode)
         break;
     case 2:
         goBack->show();
+        stackedWidget->setCurrentIndex(mode);
         break;
 
     case 3:
@@ -41,9 +36,11 @@ void MainWidget::drawWidgets()
     goBack = new QPushButton("< Return to main menu", this);
     menu = new MainMenu;
     addOper = new Calculator(nullptr, ADD);
+    multiplyOper = new Calculator (nullptr, MULTIPLY);
 
     stackedWidget->addWidget(menu);
     stackedWidget->addWidget(addOper);
+    stackedWidget->addWidget(multiplyOper);
 
     mainLayout->addWidget(stackedWidget, 0 , Qt::AlignCenter);
     mainLayout->addWidget(goBack, 0, Qt::AlignBottom | Qt::AlignLeft);

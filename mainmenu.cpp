@@ -11,6 +11,7 @@ MainMenu::MainMenu(QWidget *parent)
       vbox->setSpacing(5);
 
       QLabel *label = new QLabel("Please choose the operation", this);
+      label->setAlignment(Qt::AlignCenter);
       mAdd = new QPushButton("Add", this);
       mMultiply = new QPushButton("Multiply", this);
       mHistory = new QPushButton("History", this);

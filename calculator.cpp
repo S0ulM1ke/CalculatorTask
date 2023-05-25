@@ -1,14 +1,16 @@
 #include "calculator.h"
+#include "filedirector.h"
+
 #include <QGridLayout>
 #include <QValidator>
 #include <QPushButton>
+#include <QMessageBox>
 
 Calculator::Calculator(QWidget *parent, int type)
     : QWidget{parent}, operationType(type)
 {
     QGridLayout *grid = new QGridLayout(this);
-    grid->setSpacing(20);
-
+    //grid->setSpacing(20);
 
 
     QLabel *operationLabel= new QLabel(this);
@@ -18,7 +20,7 @@ Calculator::Calculator(QWidget *parent, int type)
     QLabel *secondNumLabel= new QLabel("Enter second value", this);
     secondNumLabel->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     mResultLabel = new QLabel(this);
-    mResultLabel->setAlignment(Qt::AlignBottom);
+    mResultLabel->setAlignment(Qt::AlignCenter);
 
     mFirstVal = new QLineEdit(this);
     mFirstVal->setValidator( new QDoubleValidator(this)); //Разобраться с double
@@ -38,8 +40,14 @@ Calculator::Calculator(QWidget *parent, int type)
     grid->addWidget(mFirstVal, 1, 1);
     grid->addWidget(secondNumLabel, 2, 0);
     grid->addWidget(mSecVal, 2 , 1);
-    grid->addWidget(calcButton, 3, 0, -1, 0);
+    grid->addWidget(calcButton, 3, 0, -1, 0, Qt::AlignTop);
     grid->addWidget(mResultLabel, 4, 0, -1, 0);
+
+    grid->setRowMinimumHeight(0, 30);
+    grid->setRowMinimumHeight(1, 30);
+    grid->setRowMinimumHeight(2, 30);
+    grid->setRowMinimumHeight(3, 30);
+    grid->setRowMinimumHeight(4, 30);
 
     connect(calcButton, &QPushButton::clicked, this, &Calculator::calculate);
 
@@ -48,14 +56,33 @@ Calculator::Calculator(QWidget *parent, int type)
 
 void Calculator::calculate()
 {
-    QString x = mFirstVal->text().replace(",", ".");
-    QString y = mSecVal->text().replace(",", ".");
-    double result;
+    if(!(mFirstVal->text().isEmpty()) && !(mSecVal->text().isEmpty())){
 
-    if (operationType == 0) {
-       result = x.toDouble() + y.toDouble();
+        QString x = mFirstVal->text().replace(",", ".");
+        QString y = mSecVal->text().replace(",", ".");
+        QString toHistoryStr;
+        QString resultStr;
+        double resultVal;
+
+        if (operationType == 0) {
+            resultVal = x.toDouble() + y.toDouble();
+            toHistoryStr = mFirstVal->text() + " + " + mSecVal->text();
+        } else {
+            toHistoryStr = mFirstVal->text() + " * " + mSecVal->text();
+            resultVal = x.toDouble() * y.toDouble();
+        }
+
+        resultStr = QString::number(resultVal).replace(".", ",");
+        toHistoryStr.append(" = " + resultStr);
+        mResultLabel->setText("Your result is " + resultStr);
+
+        FileDirector::saveHistroy(&toHistoryStr);
+    //    qDebug() << toHistoryStr;
+
+    } else {
+        QMessageBox *info = new QMessageBox();
+        info->setText("Please fill both numbers");
+        info->exec();
     }
 
-    mResultLabel->setText("Your result is " + QString::number(result));
-//    qDebug() << QString::number(result);
 }
