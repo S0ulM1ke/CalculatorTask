@@ -12,15 +12,12 @@ int FileDirector::getMaxHistorySize()
     return maxHistorySize;
 }
 
-
-
 bool FileDirector::saveHistroy(QString *resultExpression)
 {
     QDateTime cdt = QDateTime::currentDateTime();
 
     QString newItem = *(resultExpression) + " | " + cdt.date().toString("d-MMMM-yyyy") + " " + cdt.time().toString();
     QString oldItem;
-
 
     if (resultExpression != 0) {
         for (int var = 0; var < maxHistorySize; ++var) {

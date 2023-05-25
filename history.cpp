@@ -8,7 +8,6 @@ History::History(QWidget *parent)
     mainLayout = new QVBoxLayout;
     resultsLayout = new QVBoxLayout;
 
-
     QLabel* title = new QLabel("History of operations", this);
     title->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     noResults = new QLabel("There no operations in history", this);
