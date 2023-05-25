@@ -9,18 +9,16 @@
 class FileDirector
 {
 private:
- //   const QString historyFilePath = QDir::toNativeSeparators(QDir::currentPath()) + "\\history.ini";
-//    QFile historyFile = QDir::toNativeSeparators(QDir::currentPath()) + "\\history.ini";
     static const int maxHistorySize;
     static QFile historyFile;
-//    QTextStream out = QTextStream(stdout);
     static QTextStream out;
     static QSettings* historyIni;
 public:
     FileDirector();
-    virtual bool checkHistoryExistance() = 0;
+    static bool checkHistoryExistance();
     static bool saveHistroy(QString* resultExpression);
-    static void createHistroryFile();
+    static QString getHistory(int index);
+    static int getMaxHistorySize();
 };
 
 #endif // FILEDIRECTOR_H

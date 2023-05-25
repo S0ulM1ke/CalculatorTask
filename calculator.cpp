@@ -9,9 +9,7 @@
 Calculator::Calculator(QWidget *parent, int type)
     : QWidget{parent}, operationType(type)
 {
-    QGridLayout *grid = new QGridLayout(this);
-    //grid->setSpacing(20);
-
+    QGridLayout *mainLayout = new QGridLayout(this);
 
     QLabel *operationLabel= new QLabel(this);
     operationLabel->setAlignment(Qt::AlignHCenter);
@@ -35,23 +33,23 @@ Calculator::Calculator(QWidget *parent, int type)
         operationLabel->setText("Multiplication calculator");
     }
 
-    grid->addWidget(operationLabel, 0, 0, -1, 0);
-    grid->addWidget(firstNumLabel, 1 , 0);
-    grid->addWidget(mFirstVal, 1, 1);
-    grid->addWidget(secondNumLabel, 2, 0);
-    grid->addWidget(mSecVal, 2 , 1);
-    grid->addWidget(calcButton, 3, 0, -1, 0, Qt::AlignTop);
-    grid->addWidget(mResultLabel, 4, 0, -1, 0);
+    mainLayout->addWidget(operationLabel, 0, 0, -1, 0);
+    mainLayout->addWidget(firstNumLabel, 1 , 0);
+    mainLayout->addWidget(mFirstVal, 1, 1);
+    mainLayout->addWidget(secondNumLabel, 2, 0);
+    mainLayout->addWidget(mSecVal, 2 , 1);
+    mainLayout->addWidget(calcButton, 3, 0, -1, 0, Qt::AlignTop);
+    mainLayout->addWidget(mResultLabel, 4, 0, -1, 0);
 
-    grid->setRowMinimumHeight(0, 30);
-    grid->setRowMinimumHeight(1, 30);
-    grid->setRowMinimumHeight(2, 30);
-    grid->setRowMinimumHeight(3, 30);
-    grid->setRowMinimumHeight(4, 30);
+    mainLayout->setRowMinimumHeight(0, 30);
+    mainLayout->setRowMinimumHeight(1, 30);
+    mainLayout->setRowMinimumHeight(2, 30);
+    mainLayout->setRowMinimumHeight(3, 30);
+    mainLayout->setRowMinimumHeight(4, 30);
 
     connect(calcButton, &QPushButton::clicked, this, &Calculator::calculate);
 
-    setLayout(grid);
+    setLayout(mainLayout);
 }
 
 void Calculator::calculate()

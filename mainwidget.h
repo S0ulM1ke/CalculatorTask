@@ -3,6 +3,8 @@
 
 #include "mainmenu.h"
 #include "calculator.h"
+#include "history.h"
+
 #include <QWidget>
 #include <QStackedWidget>
 
@@ -22,6 +24,7 @@ private:
     QStackedWidget* stackedWidget;
     Calculator* addOper;
     Calculator* multiplyOper;
+    History* history;
     QPushButton* goBack;
 
 public:

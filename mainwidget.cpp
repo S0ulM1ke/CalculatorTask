@@ -22,6 +22,8 @@ void MainWidget::setMode(int mode)
 
     case 3:
         goBack->show();
+        history->updateHistory();
+        stackedWidget->setCurrentIndex(mode);
         break;
     default:
         break;
@@ -37,10 +39,12 @@ void MainWidget::drawWidgets()
     menu = new MainMenu;
     addOper = new Calculator(nullptr, ADD);
     multiplyOper = new Calculator (nullptr, MULTIPLY);
+    history = new History;
 
     stackedWidget->addWidget(menu);
     stackedWidget->addWidget(addOper);
     stackedWidget->addWidget(multiplyOper);
+    stackedWidget->addWidget(history);
 
     mainLayout->addWidget(stackedWidget, 0 , Qt::AlignCenter);
     mainLayout->addWidget(goBack, 0, Qt::AlignBottom | Qt::AlignLeft);
@@ -49,8 +53,6 @@ void MainWidget::drawWidgets()
 MainWidget::MainWidget(QWidget *parent, int mode)
     : QWidget(parent)
 {
-     //Реализовать connect
-
     drawWidgets();
     setMode(mode);
 

@@ -12,7 +12,6 @@ private:
     QLineEdit *mFirstVal;
     QLineEdit *mSecVal;
     QLabel *mResultLabel;
-//    const QString result = "Your result is: ";
     const int operationType;
 
 public:
