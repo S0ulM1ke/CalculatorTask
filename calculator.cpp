@@ -75,8 +75,6 @@ void Calculator::calculate()
         mResultLabel->setText("Your result is " + resultStr);
 
         FileDirector::saveHistroy(&toHistoryStr);
-    //    qDebug() << toHistoryStr;
-
     } else {
         QMessageBox *info = new QMessageBox();
         info->setText("Please fill both numbers");

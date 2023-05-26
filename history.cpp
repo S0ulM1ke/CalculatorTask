@@ -8,7 +8,7 @@ History::History(QWidget *parent)
     mainLayout = new QVBoxLayout;
     resultsLayout = new QVBoxLayout;
 
-    QLabel* title = new QLabel("History of operations", this);
+    QLabel *title = new QLabel("History of operations", this);
     title->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     noResults = new QLabel("There no operations in history", this);
     noResults->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
@@ -29,15 +29,14 @@ void History::updateHistory()
         mainLayout->removeWidget(noResults);
         noResults->hide();
 
-        for (int var = 0; var < resultsLayout->count(); ++var) {
-            if (resultsLayout->itemAt(var)->widget()) {
-                resultsLayout->itemAt(var)->widget()->deleteLater();
+        for (int i = 0; i < resultsLayout->count(); ++i) {
+            if (resultsLayout->itemAt(i)->widget()) {
+                resultsLayout->itemAt(i)->widget()->deleteLater();
             }
         }
 
-
-        for (int var = 0; var < FileDirector::getMaxHistorySize(); ++var) {
-            QString historyOutput = FileDirector::getHistory(var);
+        for (int i = 0; i < FileDirector::getMaxHistorySize(); ++i) {
+            QString historyOutput = FileDirector::getHistory(i);
             if (historyOutput != nullptr) {
                 QLabel* out = new QLabel(historyOutput, this);
 

@@ -3,9 +3,9 @@
 #include <QDate>
 
 const int FileDirector::maxHistorySize = 5;
-QFile FileDirector::historyFile = QDir::toNativeSeparators(QDir::currentPath() + + "/history.ini");
-QTextStream FileDirector::out = QTextStream(stdout);
-QSettings* FileDirector::historyIni = new QSettings(QDir::currentPath() + "/history.ini", QSettings::IniFormat);
+const QString FileDirector::historyDir = QDir::currentPath() + + "/history.ini";
+QFile FileDirector::historyFile = historyDir;
+QSettings *FileDirector::historyIni = new QSettings(historyDir, QSettings::IniFormat);
 
 int FileDirector::getMaxHistorySize()
 {
@@ -20,13 +20,13 @@ bool FileDirector::saveHistroy(QString *resultExpression)
     QString oldItem;
 
     if (resultExpression != 0) {
-        for (int var = 0; var < maxHistorySize; ++var) {
-            if (historyIni->value(QString::number(var)).toString() == nullptr){
-                historyIni->setValue(QString::number(var), newItem);
+        for (int i = 0; i < maxHistorySize; ++i) {
+            if (historyIni->value(QString::number(i)).toString() == nullptr){
+                historyIni->setValue(QString::number(i), newItem);
                 return true;
             } else {
-                oldItem = historyIni->value(QString::number(var)).toString();
-                historyIni->setValue(QString::number(var), newItem);
+                oldItem = historyIni->value(QString::number(i)).toString();
+                historyIni->setValue(QString::number(i), newItem);
                 newItem = oldItem;
             }
         }

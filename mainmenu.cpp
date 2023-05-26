@@ -7,8 +7,8 @@
 MainMenu::MainMenu(QWidget *parent)
     : QWidget{parent}
 {
-      QVBoxLayout *vbox = new QVBoxLayout(this);
-      vbox->setSpacing(5);
+      QVBoxLayout *mainLayout = new QVBoxLayout(this);
+      mainLayout->setSpacing(5);
 
       QLabel *label = new QLabel("Please choose the operation", this);
       label->setAlignment(Qt::AlignCenter);
@@ -16,10 +16,10 @@ MainMenu::MainMenu(QWidget *parent)
       mMultiply = new QPushButton("Multiply", this);
       mHistory = new QPushButton("History", this);
 
-      vbox->addWidget(label, 0);
-      vbox->addWidget(mAdd, 1);
-      vbox->addWidget(mMultiply, 2);
-      vbox->addWidget(mHistory, 3);
+      mainLayout->addWidget(label, 0);
+      mainLayout->addWidget(mAdd, 1);
+      mainLayout->addWidget(mMultiply, 2);
+      mainLayout->addWidget(mHistory, 3);
 
 }
 

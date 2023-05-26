@@ -2,7 +2,6 @@
 #define FILEDIRECTOR_H
 #include <QFile>
 #include <QDir>
-#include <QTextStream>
 #include <QSettings>
 
 
@@ -11,8 +10,8 @@ class FileDirector
 private:
     static const int maxHistorySize;
     static QFile historyFile;
-    static QTextStream out;
     static QSettings* historyIni;
+    static const QString historyDir;
 public:
     FileDirector();
     static bool checkHistoryExistance();
