@@ -10,7 +10,7 @@ class FileDirector
 private:
     static const int maxHistorySize;
     static QFile historyFile;
-    static QSettings* historyIni;
+    static QSettings *historyIni;
     static const QString historyDir;
 public:
     FileDirector();

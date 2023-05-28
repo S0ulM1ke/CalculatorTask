@@ -13,12 +13,9 @@ private:
     QPushButton *mHistory;
 public:
     explicit MainMenu(QWidget *parent = nullptr);
-    QPushButton* getAddBttn();
-    QPushButton* getMltplyBttn();
-    QPushButton* getHistoryBttn();
-
-signals:
-
+    QPushButton *getAddBttn();
+    QPushButton *getMltplyBttn();
+    QPushButton *getHistoryBttn();
 };
 
 #endif // MAINMENU_H

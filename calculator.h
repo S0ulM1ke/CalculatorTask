@@ -17,9 +17,6 @@ private:
 public:
     explicit Calculator(QWidget *parent = nullptr, int type = 0);
     void calculate();
-
-signals:
-
 };
 
 #endif // CALCULATOR_H

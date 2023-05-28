@@ -20,12 +20,12 @@ private:
         MULTIPLY = 1
     };
 
-    MainMenu* menu;
-    QStackedWidget* stackedWidget;
-    Calculator* addOper;
-    Calculator* multiplyOper;
-    History* history;
-    QPushButton* goBack;
+    MainMenu *menu;
+    QStackedWidget *stackedWidget;
+    Calculator *addOper;
+    Calculator *multiplyOper;
+    History *history;
+    QPushButton *goBack;
 
 public:
     MainWidget(QWidget *parent = nullptr, int mode = 0);
