@@ -21,7 +21,7 @@ Calculator::Calculator(QWidget *parent, int type)
     mResultLabel->setAlignment(Qt::AlignCenter);
 
     mFirstVal = new QLineEdit(this);
-    mFirstVal->setValidator( new QDoubleValidator(this)); //Разобраться с double
+    mFirstVal->setValidator( new QDoubleValidator(this));
     mSecVal = new QLineEdit(this);
     mSecVal->setValidator( new QDoubleValidator(this));
 

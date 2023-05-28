@@ -4,6 +4,9 @@
 #include <QSettings>
 #include <QDir>
 
+#ifdef Q_OS_LINUX
+#include <QFile>
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -20,28 +23,31 @@ int main(int argc, char *argv[])
         }
     }
 
-    QString path = QDir::toNativeSeparators(qApp->applicationFilePath());
+    const QString path = QDir::toNativeSeparators(qApp->applicationFilePath());
+    const QString URLSchemeName = "calc";
 
 #ifdef Q_OS_WIN
-    QSettings set("HKEY_CURRENT_USER\\Software\\Classes", QSettings::NativeFormat);
-    set.beginGroup("calc");
-    set.setValue("Default", "URL:calc Protocol");
+    QSettings set("HKEY_CURRENT_USER\\Software\\Classes", QSettings::NativeFormat);    
+    set.beginGroup(URLSchemeName);
+    set.setValue("Default", "URL:" + URLSchemeName + " Protocol");
     set.setValue("DefaultIcon/Default", path);
     set.setValue("URL Protocol", "");
     set.setValue("shell/open/command/Default", QString("\"%1\"").arg(path) + " \"%1\"");
-    set.endGroup();
+    set.endGroup();   
 #endif
 
 #ifdef Q_OS_LINUX
-    const QSettings::Format desktopFormat =QSettings::registerFormat("desktop", readDesktop, writeDesktop);
-    QSettings set("~/.local/share/applications/", desktopFormat);
+    const QString appsFolder = "~/.local/share/applications/";
+    QSettings set("~/.local/share/applications/", QSettings::IniFormat);
     set.beginGroup("Desktop Entry");
-    set.setValue("Name", "calc");
+    set.setValue("Name", URLSchemeName);
     set.setValue("Exec", path + " %u");
     set.setValue("Type", "Application");
     set.setValue("Terminal", "true");
-    set.setValue("MimeType", "x-scheme-handler/TestApp");
+    set.setValue("MimeType", "x-scheme-handler/calc");
     set.endGroup();
+    QFile schemeFile = appsFolder + URLSchemeName + ".ini";
+    schemeFile.rename(appsFolder + URLSchemeName + ".desktop");
 #endif
 
     MainWidget w(nullptr, mode);
